@@ -109,7 +109,7 @@ export function getCommitHashAuthorMap(
         const [hash, name, email] = current.split(',');
         const emailName = email && email.slice(0, email.indexOf('@'));
         memo[hash.slice(0, 7)] = {
-          name: name || FALLBACK,
+          name: name.replace(/\s/g, '&nbsp;') || FALLBACK,
           email: email || FALLBACK,
           emailName: emailName || FALLBACK,
         };
