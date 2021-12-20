@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChangelogProcessor4Beautify remove 0.0.0 1`] = `
+"## [0.2.4](https://github.com/speedy/mono/compare/v0.2.3...v0.2.4) (2021-10-23)
+    
+    
+    ### Bug Fixes
+    
+    * \`--ignore-scripts\` description ([663a396](https://github.com/speedy/mono/commits/663a3963b63706d273068895f4dd79d6c70472c2))"
+`;
+
+exports[`ChangelogProcessor4Beautify remove 1.0.0 1`] = `"## [0.5.22](https://github.com/foo/bar/compare/v0.5.21...v0.5.22) (2021-11-24)"`;
+
+exports[`ChangelogProcessor4Beautify remove empty header 1`] = `"## [0.1.1](https://github.com/foo/bar/compare/v0.1.0...v0.1.1) (2021-12-04)"`;
