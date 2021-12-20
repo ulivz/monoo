@@ -1,3 +1,12 @@
+## [0.3.2](https://github.com/ulivz/mono/compare/v0.3.1...v0.3.2) (2021-12-20)
+
+
+### Features
+
+* **changelog:** using `name` to generate user's homepage page ([d6a6d08](https://github.com/ulivz/mono/commit/d6a6d080e252fcd70272424ff2652bc00b86e07d))
+
+
+
 ## [0.3.1](https://github.com/ulivz/mono/compare/v0.3.0...v0.3.1) (2021-12-20)
 
 
