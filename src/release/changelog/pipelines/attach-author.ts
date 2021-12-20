@@ -17,7 +17,7 @@ export const ChangelogProcessor4AttachAuthor: TChangelogProcessor<IDisplayAuthor
     const getAuthorPage =
       options.getAuthorPage ??
       ((author: ChangelogNS.ICommitAuthor) => {
-        return `https://github.com/${author.emailName}`;
+        return `https://github.com/${author.name}`;
       });
 
     const hashAuthorMap = getCommitHashAuthorMap(cwd);
