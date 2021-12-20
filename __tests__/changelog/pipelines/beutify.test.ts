@@ -1,7 +1,7 @@
 /**
  * Module dependencies
  */
-import { ChangelogProcessor4Beautify } from '../../../src/r/changelog/pipelines/beautify';
+import { ChangelogProcessor4Beautify } from '../../../src/release/changelog/pipelines/beautify';
 
 describe('ChangelogProcessor4Beautify', () => {
 

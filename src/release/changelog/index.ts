@@ -21,7 +21,7 @@ export async function changelog(options: ChangelogNS.IOptions = {}) {
     beautify: false,
     commit: false,
     gitPush: false,
-    attachAuthor: true,
+    attachAuthor: false,
     authorNameType: 'name',
     ...options,
   };

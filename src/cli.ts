@@ -40,6 +40,7 @@ export function bootstrapCli() {
   cli
     .command("r", `Release your monorepo.`)
     .option("--changelog", "Whether to generate changelog.")
+    .option("--dry-run", "Preview execution.")
     .option("--runInBand", "Whether to publish package in series.")
     .option("--build [build]", "Execute custom build script before release.")
     .option(
@@ -48,6 +49,10 @@ export function bootstrapCli() {
     )
     .alias("release")
     .action((opts) => {
+      opts = {
+        changelog: true,
+        ...opts,
+      }
       return wrapCommand(release, opts);
     });
 

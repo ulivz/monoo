@@ -1,7 +1,7 @@
 /**
  * Module dependencies
  */
-import { ChangelogProcessor4NormalizeCommitUrl } from '../../../src/r/changelog/pipelines/normalize-commit-url';
+import { ChangelogProcessor4NormalizeCommitUrl } from '../../../src/release/changelog/pipelines/normalize-commit-url';
 
 describe('ChangelogProcessor4NormalizeCommitUrl', () => {
   const input = `# [0.0.0](https://github.com/speedy/mono/compare/v0.2.3...v0.2.4) (2021-10-23)

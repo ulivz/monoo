@@ -1,10 +1,10 @@
 /**
  * Module dependencies
  */
-import { ChangelogProcessor4AttachAuthor } from '../../../src/r/changelog/pipelines/attach-author';
-import { ChangelogNS } from '../../../src/r/types';
+import { ChangelogProcessor4AttachAuthor } from '../../../src/release/changelog/pipelines/attach-author';
+import { ChangelogNS } from '../../../src/release/types';
 
-jest.mock(require.resolve('../../../src/r/changelog/helpers'), () => {
+jest.mock(require.resolve('../../../src/release/changelog/helpers'), () => {
   const mockedAuthor: ChangelogNS.ICommitAuthor = {
     name: '<name>',
     email: '<email>',

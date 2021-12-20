@@ -1,8 +1,8 @@
 /**
  * Module dependencies
  */
-import type { RequestInit } from 'node-fetch';
-import type urlJoin from 'url-join';
+import type { RequestInit } from "node-fetch";
+import type urlJoin from "url-join";
 
 /**
  * Shared namespace
@@ -66,8 +66,21 @@ export namespace ReleaseNS {
      * actual publishing release.
      */
     build?: boolean | string;
+    /**
+     * Preview execution.
+     */
+    dryRun?: boolean;
+    /**
+     * @deprecated
+     */
     ready?: (ctx: IReadyContext) => Promise<unknown>;
+    /**
+     * @deprecated
+     */
     modifyReleaseArguments?: (ctx: IModifyReleaseArgumentsContext) => string[];
+    /**
+     * @deprecated
+     */
     released?: (ctx: IReleasedContext) => Promise<unknown>;
   }
 }
@@ -141,7 +154,7 @@ export namespace DingdingNS {
 
   export interface IOptions extends IWebhook {
     body?: {
-      msgtype: 'markdown';
+      msgtype: "markdown";
       markdown: {
         title: string;
         text: string;
@@ -202,7 +215,7 @@ export namespace YuqueNS {
    */
   export type Transformer = (
     data: IYuquePostData,
-    ctx: ITransformerContext,
+    ctx: ITransformerContext
   ) => Record<string, unknown>;
 
   /**
@@ -235,7 +248,7 @@ export namespace YuqueNS {
     /**
      * Transformer preset
      */
-    transformerPreset?: 'dingding-actionCard';
+    transformerPreset?: "dingding-actionCard";
     /**
      * Transformer options
      */
@@ -267,7 +280,7 @@ export namespace ChangelogNS {
      *
      * @default 'name'
      */
-    authorNameType?: 'name' | 'email';
+    authorNameType?: "name" | "email";
     /**
      * Get author remote page
      *
@@ -360,7 +373,7 @@ export namespace PostChangelogNS {
      */
     parser?: (
       changelog: string,
-      packageName: string,
+      packageName: string
     ) => {
       title: string;
       content: string;
