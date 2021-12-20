@@ -1,6 +1,6 @@
-# @speedy-js/mono
+# @nomadland/mono
 
-[![npm version](https://badgen.net/npm/v/@speedy-js/mono)](https://npm.im/@speedy-js/mono)
+[![npm version](https://badgen.net/npm/v/@nomadland/mono)](https://npm.im/@nomadland/mono)
 
 Monorepo development & continuous integration tooling.
 
@@ -42,8 +42,8 @@ When we released **_monorepo_**, a headache problem was that release flow failed
 ## Install
 
 ```bash
-npm i -g @speedy-js/mono # globally
-npm i -D @speedy-js/mono # as devDependencies
+npm i -g @nomadland/mono # globally
+npm i -D @nomadland/mono # as devDependencies
 ```
 
 ## Usage
