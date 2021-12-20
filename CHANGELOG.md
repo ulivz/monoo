@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/ulivz/mono/compare/v0.2.2...v0.3.0) (2021-12-20)
+
+
+### Features
+
+* set default changelog authorNameType to name ([6417cc3](https://github.com/ulivz/mono/commit/6417cc3a711962c154bbe70dfab1b76196807c6a))
+
+
+
 ## [0.2.2](https://github.com/ulivz/mono/compare/v0.2.1...v0.2.2) (2021-12-20)
 
 
