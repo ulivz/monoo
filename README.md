@@ -36,7 +36,7 @@ When we released **_monorepo_**, a headache problem was that release flow failed
   - [mono patch](#mono-patch)
   - [mono changelog](#mono-changelog)
   - [mono dev](#mono-dev)
-- [Projects using MONO]()
+- [Projects using MONO](#projects-using-mono)
 - [FAQ](#faq)
 - [Author](#author)
 
