@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/ulivz/mono/compare/v0.3.0...v0.3.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* **changelog:** --authorNameType does not work ([c78ebe9](https://github.com/ulivz/mono/commit/c78ebe93614ae46de578bb0a0de155f5d97d19c9))
+
+
+
 # [0.3.0](https://github.com/ulivz/mono/compare/v0.2.2...v0.3.0) (2021-12-20)
 
 
