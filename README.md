@@ -107,7 +107,7 @@ mono changelog # generate changelog
 The equivalent command under release flow is:
 
 ```
-mono changelog --beautify --commit --gitPush --attachAuthor --authorNameType email
+mono changelog --beautify --commit --gitPush --attachAuthor --authorNameType name
 ```
 
 #### Attach commit author
@@ -185,7 +185,7 @@ mono changelog --authorNameType name   # set display author to author's name
 Recommended composable flags:
 
 ```bash
-mono changelog --beautify --commit --gitPush --attachAuthor --authorNameType email
+mono changelog --beautify --commit --gitPush --attachAuthor --authorNameType name
 ```
 
 ### mono dev

@@ -221,7 +221,7 @@ export async function release(options: ReleaseNS.IOptions) {
       commit: true,
       gitPush: true,
       attachAuthor: true,
-      authorNameType: "email",
+      authorNameType: "name",
     };
     if (options.dryRun) {
       logger.info(
