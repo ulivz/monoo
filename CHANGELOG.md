@@ -1,3 +1,12 @@
+## [0.3.3](https://github.com/ulivz/mono/compare/v0.3.2...v0.3.3) (2021-12-20)
+
+
+### Features
+
+* **changelog:** handle all whitespace in user name ([0ee0a17](https://github.com/ulivz/mono/commit/0ee0a175bbfa1c79decd7c3d277b967c89d19723))
+
+
+
 ## [0.3.2](https://github.com/ulivz/mono/compare/v0.3.1...v0.3.2) (2021-12-20)
 
 
