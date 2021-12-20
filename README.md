@@ -36,6 +36,7 @@ When we released **_monorepo_**, a headache problem was that release flow failed
   - [mono patch](#mono-patch)
   - [mono changelog](#mono-changelog)
   - [mono dev](#mono-dev)
+- [Projects using MONO]()
 - [FAQ](#faq)
 - [Author](#author)
 
@@ -193,6 +194,14 @@ mono changelog --beautify --commit --gitPush --attachAuthor --authorNameType nam
 ```bash
 mono dev       # launch a on-demand development build for monorepo.
 ```
+
+## Projects Using MONO
+
+Projects that use **MONO**:
+
+- [VuePress](https://github.com/vuejs/vuepress): 📝 Minimalistic Vue-powered static site generator.
+- Many ByteDance projects.
+- Feel free to add yours here...
 
 ## FAQ
 
