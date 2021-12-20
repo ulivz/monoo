@@ -229,7 +229,7 @@ export async function release(options: ReleaseNS.IOptions) {
           chalk.gray(JSON.stringify(changelogOptions, null, 2))
       );
     } else {
-      await changelog();
+      await changelog(changelogOptions);
     }
   }
 }
