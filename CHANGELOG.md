@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/speedy-js/mono/compare/v0.2.0...v0.2.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* the "path" argument must be of type string. Received undefined ([#2](https://github.com/speedy-js/mono/issues/2)) ([80b84d7](https://github.com/speedy-js/mono/commit/80b84d722b53ea8f182814ba871c94d89c8e251e))
+
+
+
 # [0.2.0](https://github.com/speedy-js/mono/compare/f891d6e12265eb12454fedc0d6b43a5b1846744c...v0.2.0) (2021-12-20)
 
 
