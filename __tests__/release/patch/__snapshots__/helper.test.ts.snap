@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getVisibleReleaseStatusLog 1`] = `
+"╭───────────────────────────────────────────────────────────────────────────╮
+│                                                                           │
+│   Package Name  Remote Version (tag: next)  Published  Expected Version   │
+│   @scope/foo    2.1.2                       Yes        -                  │
+│   @scope/bar    2.1.1                       NO         2.1.2              │
+│   @scope/baz    2.1.2                       Yes        -                  │
+│   @scope/qux    2.1.1                       NO         2.1.2              │
+│                                                                           │
+╰───────────────────────────────────────────────────────────────────────────╯"
+`;
