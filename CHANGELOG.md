@@ -1,3 +1,12 @@
+## [0.2.2](https://github.com/ulivz/mono/compare/v0.2.1...v0.2.2) (2021-12-20)
+
+
+### Features
+
+* rename to `@nomadland/mono` ([197080a](https://github.com/ulivz/mono/commit/197080ace46bf48fc36e5253610a17a06d87eafe))
+
+
+
 ## [0.2.1](https://github.com/speedy-js/mono/compare/v0.2.0...v0.2.1) (2021-12-20)
 
 
