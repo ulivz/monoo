@@ -78,7 +78,7 @@ export function bootstrapCli() {
     .option("--gitPush", "execute git push or not, defaults to false")
     .option("--attachAuthor", "add author or not, defaults to false")
     .option(
-      "--authorNameType",
+      "--authorNameType <type>",
       "type of author name, available options: `name`, `email`, defaults to `name`"
     )
     .action((opts) => {
