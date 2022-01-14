@@ -220,7 +220,7 @@ export async function release(options: ReleaseNS.IOptions) {
       beautify: true,
       commit: true,
       gitPush: true,
-      attachAuthor: true,
+      attachAuthor: false,
       authorNameType: "name",
     };
     if (options.dryRun) {
