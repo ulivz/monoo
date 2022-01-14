@@ -1,7 +1,7 @@
 {
   "name": "@nomadland/mono",
   "description": "Monorepo development & continuous integration tooling.",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
