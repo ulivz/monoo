@@ -1,3 +1,12 @@
+## [0.3.4](https://github.com/ulivz/mono/compare/v0.3.3...v0.3.4) (2022-01-14)
+
+
+### Features
+
+* do not attach user ([0385908](https://github.com/ulivz/mono/commit/0385908d1fe695778741ba36a022d0f680a2052a))
+
+
+
 ## [0.3.3](https://github.com/ulivz/mono/compare/v0.3.2...v0.3.3) (2021-12-20)
 
 
