@@ -5,6 +5,7 @@
 export interface IPackageJSON {
   name: string;
   version: string;
+  private?: boolean;
   [key:string]:any;
 }
 

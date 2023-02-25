@@ -65,14 +65,16 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
   const pkgs = await loadMonorepoPackages(cwd, lernaConfig);
   pkgs.forEach((pkg) => removeGitHead(join(pkg.dir, "package.json")));
 
-  const remotePkgs: IMonorepoPackageWithRemoteInfo[] = await Promise.all(
-    pkgs.map<Promise<IMonorepoPackageWithRemoteInfo>>(async (pkg) => {
-      return {
-        ...pkg,
-        remoteVersion: await fetchPackageVersion(pkg.name, tag),
-      };
-    })
-  );
+  const remotePkgs: IMonorepoPackageWithRemoteInfo[] = (
+    await Promise.all(
+      pkgs.map<Promise<IMonorepoPackageWithRemoteInfo>>(async (pkg) => {
+        return {
+          ...pkg,
+          remoteVersion: await fetchPackageVersion(pkg.name, tag),
+        };
+      })
+    )
+  ).filter((pkg) => !pkg.packageJson.private);
 
   if (remotePkgs.every((pkg) => pkg.remoteVersion === version)) {
     return console.log(
