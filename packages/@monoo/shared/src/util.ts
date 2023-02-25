@@ -137,15 +137,19 @@ export function loadMonorepoPackages(
   if (!lernaConfig) {
     lernaConfig = resolveLernaConfig(cwd).data;
   }
-  const packageDirs = lernaConfig.packages || [];
-  console.log('packageDirs', packageDirs);
-  
+  let packageDirs = lernaConfig.packages;
+  if (!packageDirs) {
+    const pkg = requirePkg(cwd);
+    packageDirs = pkg.workspaces;
+  }
+  if (!Array.isArray(packageDirs)) {
+    throw new Error(`Cannot resolve monorepo workspaces.`);
+  }
   const packages = packageDirs.map((packageDir) => {
     return packageDir.replace(/$\//, "") + "/package.json";
   });
   const resolved = globby.sync(packages, { cwd, onlyFiles: true });
-  console.log('resolved', resolved);
-  
+
   return resolved.map((relative) => {
     const dir = path.dirname(path.join(cwd, relative));
     const key = relative.slice(relative.lastIndexOf("/") + 1);
