@@ -10,14 +10,14 @@
     "bootstrap": "pnpm install --prefer-offline",
     "build": "pnpm run -r build",
     "clean": "pnpm run -r clean",
-    "dev": "mono d",
-    "release": "mono r --changelog --ignore-scripts --build",
+    "dev": "monoo d",
+    "release": "monoo r --changelog --ignore-scripts --build",
     "prepublishOnly": "npm run clean && npm run build",
     "test": "jest",
     "cov": "jest --coverage"
   },
   "devDependencies": {
-    "@nomadland/mono": "0.3.4",
+    "monoo": "0.4.0",
     "@types/jest": "27.0.0",
     "jest": "27.3.1",
     "jest-cli": "27.3.1",
