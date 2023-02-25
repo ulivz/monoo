@@ -1,6 +1,6 @@
-# @nomadland/mono
+# monoo
 
-[![npm version](https://badgen.net/npm/v/@nomadland/mono)](https://npm.im/@nomadland/mono)
+[![npm version](https://badgen.net/npm/v/monoo)](https://npm.im/monoo)
 
 Monorepo development & continuous integration tooling.
 
@@ -21,30 +21,35 @@ When we released **_monorepo_**, a headache problem was that release flow failed
 
 ## Table of Contents
 
-- [Install](#install)
-- [Usage](#usage)
-  - [A complete release workflow](#a-complete-release-workflow)
-  - [Execute build after bump version](#Execute-build-after-bump-version)
-  - [Independent patch process](#independent-patch-process)
-  - [Generate Changelog](#generate-changelog)
-    - [Attach commit author](#attach-commit-author)
-    - [Create commit](#create-commit)
-    - [Auto push](#auto-push)
-  - [On-demand development build](#on-demand-development-build)
-- [Commands](#commands)
-  - [mono release](#mono-release)
-  - [mono patch](#mono-patch)
-  - [mono changelog](#mono-changelog)
-  - [mono dev](#mono-dev)
-- [Projects using MONO](#projects-using-mono)
-- [FAQ](#faq)
-- [Author](#author)
+- [monoo](#monoo)
+  - [Motivation](#motivation)
+  - [Features](#features)
+  - [Table of Contents](#table-of-contents)
+  - [Install](#install)
+  - [Usage](#usage)
+    - [A complete release workflow](#a-complete-release-workflow)
+    - [Execute build after bump version](#execute-build-after-bump-version)
+    - [Independent patch process](#independent-patch-process)
+    - [Generate Changelog](#generate-changelog)
+      - [Attach commit author](#attach-commit-author)
+      - [Create commit](#create-commit)
+      - [Auto push](#auto-push)
+    - [On-demand development build](#on-demand-development-build)
+  - [Commands](#commands)
+    - [monoo release](#monoo-release)
+    - [monoo patch](#monoo-patch)
+    - [monoo changelog](#monoo-changelog)
+    - [monoo dev](#monoo-dev)
+  - [Projects Using MONO](#projects-using-mono)
+  - [FAQ](#faq)
+    - [I don't use lerna, can I use it?](#i-dont-use-lerna-can-i-use-it)
+  - [Author](#author)
 
 ## Install
 
 ```bash
-npm i -g @nomadland/mono # globally
-npm i -D @nomadland/mono # as devDependencies
+npm i -g monoo # globally
+npm i -D monoo # as devDependencies
 ```
 
 ## Usage
@@ -67,7 +72,7 @@ If you had a monorepo as:
 If current version is `2.1.1`, after a period of time, I decide to release a patch version with `latest` version, so I execute:
 
 ```bash
-mono release
+monoo release
 ```
 
 You'll receive a prompt log to choose a release version, and you selected `2.1.2` to continue.
@@ -82,10 +87,10 @@ Just select `Y` to finish release for all unpublished packages.
 
 ### Execute build after bump version
 
-You may execute `mono release` after build packages, but if your build process generated assets that contains the version of each, you'll get a wrong version at final NPM assets, you can execute build after version is bumped:
+You may execute `monoo release` after build packages, but if your build process generated assets that contains the version of each, you'll get a wrong version at final NPM assets, you can execute build after version is bumped:
 
 ```bash
-mono release --build --ignore-scripts 
+monoo release --build --ignore-scripts 
 # Note that --ignore-scripts is required if you set `prepublishOnly` for sub packages.
 ```
 
@@ -94,7 +99,7 @@ mono release --build --ignore-scripts
 Patch process has been integrated into [release flow](#a-complete-release-workflow), you can also use it separately:
 
 ```bash
-mono patch --tag=latest       # launch patch process with latest tag.
+monoo patch --tag=latest       # launch patch process with latest tag.
 ```
 
 ### Generate Changelog
@@ -102,19 +107,19 @@ mono patch --tag=latest       # launch patch process with latest tag.
 Changelog process has been integrated into [release flow](#a-complete-release-workflow), You can also use it separately:
 
 ```bash
-mono changelog # generate changelog
+monoo changelog # generate changelog
 ```
 
 The equivalent command under release flow is:
 
 ```
-mono changelog --beautify --commit --gitPush --attachAuthor --authorNameType name
+monoo changelog --beautify --commit --gitPush --attachAuthor --authorNameType name
 ```
 
 #### Attach commit author
 
 ```bash
-mono changelog --attachAuthor
+monoo changelog --attachAuthor
 ```
 
 Commits under generated changelog will be attached with commit author:
@@ -129,70 +134,70 @@ Commits under generated changelog will be attached with commit author:
 #### Create commit
 
 ```bash
-mono changelog --commit
+monoo changelog --commit
 ```
 
-mono will create a commit for generated changelog.
+monoo will create a commit for generated changelog.
 
 #### Auto push
 
 ```bash
-mono changelog --gitPush
+monoo changelog --gitPush
 ```
 
-mono will create a push action to remote repository.
+monoo will create a push action to remote repository.
 
 ### On-demand development build
 
-using `lerna run dev` will launch all dev process for all packages, using `mono dev` will launch a on-demand development build for monorepo.
+using `lerna run dev` will launch all dev process for all packages, using `monoo dev` will launch a on-demand development build for monorepo.
 
 ```bash
-mono dev
+monoo dev
 ```
 
 ## Commands
 
-### mono release
+### monoo release
 
-Using `mono release` to replace `lerna publish`:
+Using `monoo release` to replace `lerna publish`:
 
 ```bash
-mono release                  # standard release flow
-mono release --no-changelog   # do not generate changelog
-mono release --ignore-scripts # ignore npm scripts under release process.
-mono release --dry-run        # preview execution
+monoo release                  # standard release flow
+monoo release --no-changelog   # do not generate changelog
+monoo release --ignore-scripts # ignore npm scripts under release process.
+monoo release --dry-run        # preview execution
 ```
 
-### mono patch
+### monoo patch
 
 ```bash
-mono patch --tag laest      # standard release flow
-mono patch --tag next       # launch patch process with next tag.
-mono patch --tag latest --ignore-scripts    # Ignore npm scripts under patch process.
+monoo patch --tag laest      # standard release flow
+monoo patch --tag next       # launch patch process with next tag.
+monoo patch --tag latest --ignore-scripts    # Ignore npm scripts under patch process.
 ```
 
-### mono changelog
+### monoo changelog
 
 ```bash
-mono changelog
-mono changelog --beautify              # beautify changelog
-mono changelog --commit                # create a commit
-mono changelog --gitPush               # push to remote repository
-mono changelog --attachAuthor          # add author to generated changelog
-mono changelog --authorNameType email  # set display author to author's email
-mono changelog --authorNameType name   # set display author to author's name
+monoo changelog
+monoo changelog --beautify              # beautify changelog
+monoo changelog --commit                # create a commit
+monoo changelog --gitPush               # push to remote repository
+monoo changelog --attachAuthor          # add author to generated changelog
+monoo changelog --authorNameType email  # set display author to author's email
+monoo changelog --authorNameType name   # set display author to author's name
 ```
 
 Recommended composable flags:
 
 ```bash
-mono changelog --beautify --commit --gitPush --attachAuthor --authorNameType name
+monoo changelog --beautify --commit --gitPush --attachAuthor --authorNameType name
 ```
 
-### mono dev
+### monoo dev
 
 ```bash
-mono dev       # launch a on-demand development build for monorepo.
+monoo dev       # launch a on-demand development build for monorepo.
 ```
 
 ## Projects Using MONO
@@ -207,7 +212,7 @@ Projects that use **MONO**:
 
 ### I don't use lerna, can I use it?
 
-mono leverage lerna under the hood, but you can still use it in other monorepo tool chains, such as rush.
+monoo leverage lerna under the hood, but you can still use it in other monorepo tool chains, such as rush.
 
 ## Author
 

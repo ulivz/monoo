@@ -1,0 +1,20 @@
+{
+  "name": "@monoo/types",
+  "description": "Types for monoo",
+  "version": "0.0.1",
+  "main": "lib/index",
+  "types": "lib/index",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "pnpm run compile",
+    "clean": "rimraf ./lib *.tsbuildinfo",
+    "compile": "tsc -b tsconfig.build.json",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@types/node": "16"
+  },
+  "devDependencies": {}
+}
