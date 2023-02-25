@@ -39,6 +39,7 @@ export class MonorepoBuilder implements IMonorepoBuilder {
    */
   async bootstrap() {
     this.packages = loadMonorepoPackages(this.options.cwd);
+    console.log('this.packages', this.packages);
   }
 
   /**

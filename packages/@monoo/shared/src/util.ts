@@ -137,11 +137,17 @@ export function loadMonorepoPackages(
   if (!lernaConfig) {
     lernaConfig = resolveLernaConfig(cwd).data;
   }
-  const packages = lernaConfig.packages || [];
-  const resolved = globby.sync(packages, { cwd, onlyDirectories: true });
-
+  const packageDirs = lernaConfig.packages || [];
+  console.log('packageDirs', packageDirs);
+  
+  const packages = packageDirs.map((packageDir) => {
+    return packageDir.replace(/$\//, "") + "/package.json";
+  });
+  const resolved = globby.sync(packages, { cwd, onlyFiles: true });
+  console.log('resolved', resolved);
+  
   return resolved.map((relative) => {
-    const dir = path.join(cwd, relative);
+    const dir = path.dirname(path.join(cwd, relative));
     const key = relative.slice(relative.lastIndexOf("/") + 1);
     const packageJson = requirePkg(dir);
     const { name } = packageJson;
