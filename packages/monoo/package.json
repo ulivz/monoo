@@ -1,7 +1,7 @@
 {
   "name": "monoo",
   "description": "monoo cli",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "lib/index",
   "types": "lib/index",
   "files": [
@@ -17,8 +17,8 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@monoo/shared": "0.4.1",
-    "@monoo/types": "0.4.1",
+    "@monoo/shared": "0.4.2",
+    "@monoo/types": "0.4.2",
     "@speedy-js/config-loader": "0.1.3",
     "boxen": "^4.1.0",
     "cac": "^6.5.10",
