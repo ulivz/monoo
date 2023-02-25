@@ -1,3 +1,24 @@
+## [0.3.4](https://github.com/ulivz/mono/compare/v0.4.3...v0.3.4) (2023-02-25)
+
+
+
+## [0.4.3](https://github.com/ulivz/mono/compare/v0.4.2...v0.4.3) (2023-02-25)
+
+
+### Bug Fixes
+
+* `monoo dev` does not work ([988481b](https://github.com/ulivz/mono/commit/988481ba02bb0e2a37b77de461045ecb17d3c070))
+* patch doesn't work ([e98faa0](https://github.com/ulivz/mono/commit/e98faa0a9608c96d24591839b03af6acb5c40594))
+* patch release dir ([62eaffb](https://github.com/ulivz/mono/commit/62eaffbc19d6d7236c7776b05e39f530f2a774d2))
+
+
+### Features
+
+* do not patch private packages ([f4427df](https://github.com/ulivz/mono/commit/f4427df3df204077b4df662901cb411fe3ea037a))
+* read monorepo workspaces from package.json ([959e29d](https://github.com/ulivz/mono/commit/959e29dd20f261224765fa8928d699b05426c4e3))
+
+
+
 ## [0.3.4](https://github.com/ulivz/mono/compare/v0.4.1...v0.3.4) (2023-02-25)
 
 
