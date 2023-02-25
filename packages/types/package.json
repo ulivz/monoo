@@ -18,5 +18,9 @@
   },
   "devDependencies": {
     "rimraf": "4.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }

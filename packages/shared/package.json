@@ -26,5 +26,9 @@
   "devDependencies": {
     "@types/shelljs": "0.8.8",
     "rimraf": "4.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }
