@@ -11,9 +11,9 @@
     "monoo": "bin/cli.js"
   },
   "scripts": {
-    "build": "pnpm run compile",
+    "dev": "pnpm run build -- -w",
     "clean": "rimraf ./lib *.tsbuildinfo",
-    "compile": "tsc -b tsconfig.build.json",
+    "build": "tsc -b tsconfig.build.json",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
