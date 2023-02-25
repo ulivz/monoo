@@ -107,8 +107,7 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
     );
 
     const releasePkg = async (pkg: IMonorepoPackageWithRemoteInfo) => {
-      const commandCwd = join(cwd, `packages/${pkg.dir}`);
-      console.log(chalk.gray(`$ npm publish --tag ${tag} # ${commandCwd}`));
+      console.log(chalk.gray(`$ npm publish --tag ${tag} # ${pkg.dir}`));
       const npmArgs = ["publish", "--tag", tag];
       if (ignoreScripts) {
         npmArgs.push("--ignore-scripts");
@@ -116,7 +115,7 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
       await execa("npm", npmArgs, {
         // silent: true,
         stdio: "inherit",
-        cwd: commandCwd,
+        cwd: pkg.dir,
       });
       console.log(`+ ${pkg.name}@${version}\n`);
     };
