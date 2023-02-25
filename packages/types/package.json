@@ -16,5 +16,7 @@
   "dependencies": {
     "@types/node": "16"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "rimraf": "4.1.0"
+  }
 }

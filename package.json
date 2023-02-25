@@ -9,8 +9,8 @@
   "scripts": {
     "bootstrap": "pnpm install --prefer-offline",
     "build": "pnpm run -r build",
+    "clean": "pnpm run -r clean",
     "prepublishOnly": "npm run clean && npm run build",
-    "clean": "rm -rf lib",
     "test": "jest",
     "cov": "jest --coverage",
     "release": "publish"
