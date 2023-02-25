@@ -1,7 +1,7 @@
 {
   "name": "@monoo/types",
   "description": "Types for monoo",
-  "version": "0.0.1",
+  "version": "0.3.0",
   "main": "lib/index",
   "types": "lib/index",
   "files": [
