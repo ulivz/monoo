@@ -103,7 +103,7 @@ export async function release(options: ReleaseNS.IOptions) {
   const config = resolveLernaConfig(cwd);
 
   if (!config?.path) {
-    throw new Error('"mono.json" or "lerna.json" doesn\'t exist');
+    throw new Error('"monoo.json" or "lerna.json" doesn\'t exist');
   }
 
   const lernaConfig: ILernaConfig = config.data;

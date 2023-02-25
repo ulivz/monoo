@@ -11,7 +11,7 @@ import execa from "execa";
 export { execa };
 
 const LERNA_CONFIG = "lerna.json";
-const MONO_CONFIG = "mono.json";
+const MONOO_CONFIG = "monoo.json";
 
 /**
  * Git push
@@ -50,7 +50,7 @@ export function safelyRequireJson(jsonPath: string) {
 }
 
 /**
- * Resolve content of `lerna.json` or `mono.json`
+ * Resolve content of `lerna.json` or `monoo.json`
  *
  * @param {String} cwd
  * @returns {Object}
@@ -66,14 +66,14 @@ export function resolveLernaConfig(cwd = process.cwd()): {
       data: requireJson(lernaConfigPath),
     };
   }
-  const monoConfigPath = join(cwd, MONO_CONFIG);
+  const monoConfigPath = join(cwd, MONOO_CONFIG);
   if (existsSync(monoConfigPath)) {
     return {
       path: monoConfigPath,
       data: requireJson(monoConfigPath),
     };
   }
-  throw new Error(`Missing lerna.json or mono.json`);
+  throw new Error(`Missing lerna.json or monoo.json`);
 }
 
 /**
@@ -81,7 +81,7 @@ export function resolveLernaConfig(cwd = process.cwd()): {
  */
 export function ensureLernaConfig(cwd: string) {
   const lernaConfig = resolveLernaConfig(cwd);
-  if (lernaConfig.path.endsWith(MONO_CONFIG)) {
+  if (lernaConfig.path.endsWith(MONOO_CONFIG)) {
     writeFileSync(
       join(cwd, LERNA_CONFIG),
       JSON.stringify(lernaConfig.data, null, 2)
@@ -90,10 +90,10 @@ export function ensureLernaConfig(cwd: string) {
 }
 
 /**
- * Ensure that lerna.json does not exists when 'mono.json' exists.
+ * Ensure that lerna.json does not exists when 'monoo.json' exists.
  */
 export function cleanLernaConfig(cwd: string) {
-  const monoConfigPath = join(cwd, MONO_CONFIG);
+  const monoConfigPath = join(cwd, MONOO_CONFIG);
   const lernaConfigPath = join(cwd, LERNA_CONFIG);
   if (existsSync(monoConfigPath)) {
     const lernaConfig = resolveLernaConfig(cwd);
