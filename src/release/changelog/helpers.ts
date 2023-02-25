@@ -1,7 +1,7 @@
 /**
  * Module dependencies
  */
-import { execa } from '../shared';
+import { execa } from '../../shared';
 import { ChangelogNS } from '../types';
 
 /**

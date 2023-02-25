@@ -1,29 +1,136 @@
 /**
  * Module dependencies
  */
+import { existsSync, writeFileSync, unlinkSync } from 'fs-extra';
 import * as path from 'path';
 import globby from 'globby';
 import { IMonorepoPackage } from '../types';
+import { ILernaConfig } from '../types';
 
 /**
- * Safely load package.json
+ * Module dependencies
  */
-export function requirePkg(cwd: string): Record<string, any> {
-  try {
-    return require(`${cwd}/package.json`);
-  } catch (_) {
-    return {};
+import { join } from 'path';
+import execa from 'execa';
+import { IPackageJSON } from '../types/monorepo';
+
+export { execa };
+
+const LERNA_CONFIG = 'lerna.json';
+const MONO_CONFIG = 'mono.json';
+
+/**
+ * Git push
+ *
+ * @returns {Promise<void>}
+ */
+
+export async function gitPush() {
+  await execa('git', ['push'], { stdio: 'inherit' });
+}
+
+/**
+ * Require json file with no cache
+ *
+ * @param {String} jsonPath
+ * @returns {Promise<Object>}
+ */
+
+export function requireJson(jsonPath: string) {
+  delete require.cache[jsonPath];
+  const json = require(jsonPath);
+  return json;
+}
+
+/**
+ * Safely require json file with no cache
+ *
+ * @param {String} jsonPath
+ * @returns {Promise<Object>}
+ */
+export function safelyRequireJson(jsonPath: string) {
+  if (existsSync(jsonPath)) {
+    return requireJson(jsonPath);
+  }
+  return {};
+}
+
+/**
+ * Resolve content of `lerna.json` or `mono.json`
+ *
+ * @param {String} cwd
+ * @returns {Object}
+ */
+export function resolveLernaConfig(cwd = process.cwd()): {
+  path: string;
+  data: ILernaConfig;
+} | null {
+  const lernaConfigPath = join(cwd, LERNA_CONFIG);
+  if (existsSync(lernaConfigPath)) {
+    return {
+      path: lernaConfigPath,
+      data: requireJson(lernaConfigPath),
+    };
+  }
+  const monoConfigPath = join(cwd, MONO_CONFIG);
+  if (existsSync(monoConfigPath)) {
+    return {
+      path: monoConfigPath,
+      data: requireJson(monoConfigPath),
+    };
+  }
+  throw new Error(`Missing lerna.json or mono.json`);
+}
+
+/**
+ * Ensure lerna.json exists
+ */
+export function ensureLernaConfig(cwd: string) {
+  const lernaConfig = resolveLernaConfig(cwd);
+  if (lernaConfig.path.endsWith(MONO_CONFIG)) {
+    writeFileSync(
+      join(cwd, LERNA_CONFIG),
+      JSON.stringify(lernaConfig.data, null, 2),
+    );
   }
 }
 
 /**
- * Load lerna.json
+ * Ensure that lerna.json does not exists when 'mono.json' exists.
  */
-export function loadMonorepoConfig(cwd: string) {
+export function cleanLernaConfig(cwd: string) {
+  const monoConfigPath = join(cwd, MONO_CONFIG);
+  const lernaConfigPath = join(cwd, LERNA_CONFIG);
+  if (existsSync(monoConfigPath)) {
+    const lernaConfig = resolveLernaConfig(cwd);
+    if (lernaConfig.path.endsWith(LERNA_CONFIG)) {
+      writeFileSync(monoConfigPath, JSON.stringify(lernaConfig.data, null, 2));
+      unlinkSync(lernaConfigPath);
+    }
+  }
+}
+
+/**
+ *
+ * Resolve content of `lerna.json`
+ *
+ * @param {String} cwd
+ * @returns {Object}
+ */
+export function resolvePackageJson(cwd = process.cwd()) {
+  const pkgJsonPath = join(cwd, 'package.json');
+  return safelyRequireJson(pkgJsonPath);
+}
+
+
+/**
+ * Safely load package.json
+ */
+export function requirePkg(cwd: string): IPackageJSON {
   try {
-    return require(`${cwd}/lerna.json`);
+    return require(`${cwd}/package.json`);
   } catch (_) {
-    return requirePkg(cwd);
+    return {} as IPackageJSON;
   }
 }
 
@@ -32,9 +139,12 @@ export function loadMonorepoConfig(cwd: string) {
  */
 export function loadMonorepoPackages(
   cwd: string = process.cwd(),
+  lernaConfig?: ILernaConfig,
 ): IMonorepoPackage[] {
-  const packages = loadMonorepoConfig(cwd).packages || [];
-
+  if(!lernaConfig){
+    lernaConfig = resolveLernaConfig(cwd).data;
+  }
+  const packages = lernaConfig.packages || [];
   const resolved = globby.sync(packages, { cwd, onlyDirectories: true });
 
   return resolved.map((relative) => {

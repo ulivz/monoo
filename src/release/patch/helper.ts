@@ -5,13 +5,13 @@ import chalk from "chalk";
 import boxen, { BorderStyle } from "boxen";
 import textTable from "text-table";
 import stringWidth from "string-width";
-import { NpmNS } from "../types";
+import { IMonorepoPackageWithRemoteInfo } from '../../types/monorepo';
 
 /**
  * Get visible release status log
  */
 export function getVisibleReleaseStatusLog(
-  pkgs: NpmNS.IRemotePackageInfo[],
+  pkgs: IMonorepoPackageWithRemoteInfo[],
   currentVersion: string,
   currentTag: string
 ) {

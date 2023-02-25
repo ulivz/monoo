@@ -6,14 +6,15 @@ import execa from "execa";
 import semver, { ReleaseType } from "semver";
 import inquirer from "inquirer";
 import { patch } from "./patch";
+import { logger } from "./shared";
+import { ReleaseNS, ChangelogNS } from "./types";
+import { changelog } from "./changelog";
+import { ILernaConfig } from "../types";
 import {
-  logger,
   resolveLernaConfig,
   ensureLernaConfig,
   cleanLernaConfig,
-} from "./shared";
-import { ReleaseNS, ChangelogNS } from "./types";
-import { changelog } from "./changelog";
+} from "../shared";
 
 export { patch, changelog };
 
@@ -105,7 +106,7 @@ export async function release(options: ReleaseNS.IOptions) {
     throw new Error('"mono.json" or "lerna.json" doesn\'t exist');
   }
 
-  const lernaConfig: ReleaseNS.ILernaConfig = config.data;
+  const lernaConfig: ILernaConfig = config.data;
 
   if (lernaConfig.version === "independent") {
     throw new Error('"release" cannot be executed under "independent" mode');

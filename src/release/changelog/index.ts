@@ -1,17 +1,17 @@
 /**
  * Module dependencies
  */
-import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import { generateChangelog, createChangelogCommit } from './helpers';
-import { resolveLernaConfig, resolvePackageJson, gitPush } from '../shared';
-import { ChangelogNS } from '../types';
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { join } from "path";
+import { generateChangelog, createChangelogCommit } from "./helpers";
+import { resolveLernaConfig, resolvePackageJson, gitPush } from "../../shared";
+import { ChangelogNS } from "../types";
 import {
   ChangelogProcessor4Beautify,
   ChangelogProcessor4AttachAuthor,
   ChangelogProcessor4NormalizeCommitUrl,
   ChangelogProcessor,
-} from './pipelines';
+} from "./pipelines";
 
 /**
  * Expose `changelog`
@@ -22,7 +22,7 @@ export async function changelog(options: ChangelogNS.IOptions = {}) {
     commit: false,
     gitPush: false,
     attachAuthor: false,
-    authorNameType: 'name',
+    authorNameType: "name",
     ...options,
   };
 
@@ -42,11 +42,11 @@ export async function changelog(options: ChangelogNS.IOptions = {}) {
     }
   }
 
-  const changelogPath = join(options.cwd, 'CHANGELOG.md');
+  const changelogPath = join(options.cwd, "CHANGELOG.md");
   const isFirst = !existsSync(changelogPath);
   await generateChangelog(options.cwd, isFirst);
 
-  let changelogContent = readFileSync(changelogPath, 'utf-8');
+  let changelogContent = readFileSync(changelogPath, "utf-8");
 
   const processor = new ChangelogProcessor(options.cwd, changelogContent);
   processor.addProcessor(ChangelogProcessor4NormalizeCommitUrl, {});
@@ -64,7 +64,7 @@ export async function changelog(options: ChangelogNS.IOptions = {}) {
 
   changelogContent = processor.process();
 
-  writeFileSync(changelogPath, changelogContent, 'utf-8');
+  writeFileSync(changelogPath, changelogContent, "utf-8");
 
   if (options.commit) {
     await createChangelogCommit(options.cwd, version);

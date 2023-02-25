@@ -6,9 +6,11 @@ import { readFileSync, writeFileSync } from "fs";
 import chalk from "chalk";
 import inquirer from "inquirer";
 import execa from "execa";
-import { resolveLernaConfig, resolvePackages, logger } from "../shared";
-import { PatchNS, NpmNS } from "../types";
+import { fetchPackageVersion, logger } from "../shared";
+import { PatchNS } from "../types";
 import { getVisibleReleaseStatusLog } from "./helper";
+import { resolveLernaConfig, loadMonorepoPackages } from "../../shared";
+import { IMonorepoPackageWithRemoteInfo } from "../../types/monorepo";
 
 /**
  * Remove duplicate gitHead field when "lerna publish" fails.
@@ -36,7 +38,7 @@ export function removeGitHead(path: string) {
 export async function patch(options: PatchNS.IOptions): Promise<void | never> {
   const { cwd, tag, runInBand = false, ignoreScripts = false } = options;
 
-  let { version } = options;
+let { version } = options;
 
   logger.info("Patch Started");
 
@@ -44,10 +46,11 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
     throw new Error('[MONO] "tag" is required for "patch"');
   }
 
+  const lernaConfig = resolveLernaConfig(cwd).data;
+
   if (!version) {
     try {
-      const config = resolveLernaConfig(cwd);
-      version = config?.data.version;
+      version = lernaConfig?.version;
     } catch (e) {
       // dot not handle it for now
     }
@@ -56,8 +59,8 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
   logger.info(`Version: ${chalk.cyan(version)}`);
   logger.info(`Tag: ${chalk.cyan(tag)}`);
 
-  const pkgs = await resolvePackages({ cwd, tag });
-  pkgs.forEach((pkg) => removeGitHead(join(pkg.path, "package.json")));
+  const pkgs = await loadMonorepoPackages(cwd, lernaConfig);
+  pkgs.forEach((pkg) => removeGitHead(join(pkg.dir, "package.json")));
 
   if (pkgs.every((pkg) => pkg.version === version)) {
     return console.log(
@@ -67,11 +70,21 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
     );
   }
 
+  const remotePkgs: IMonorepoPackageWithRemoteInfo[] = await Promise.all(
+    pkgs.map<Promise<IMonorepoPackageWithRemoteInfo>>(async (pkg) => {
+      return {
+        ...pkg,
+        remoteVersion: await fetchPackageVersion(pkg.name, tag),
+      };
+    })
+  );
+
   const visibleReleaseStatusLog = getVisibleReleaseStatusLog(
-    pkgs,
+    remotePkgs,
     version,
     tag
   );
+
   console.log(visibleReleaseStatusLog);
 
   const { yes } = await inquirer.prompt([
@@ -84,10 +97,10 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
   ]);
 
   if (yes === "Y") {
-    const patchedPkgs = pkgs.filter((pkg) => pkg.version !== version);
+    const patchedPkgs = remotePkgs.filter((pkg) => pkg.remoteVersion !== version);
 
-    const releasePkg = async (pkg: NpmNS.IRemotePackageInfo) => {
-      const commandCwd = join(cwd, `packages/${pkg.dirname}`);
+    const releasePkg = async (pkg: IMonorepoPackageWithRemoteInfo) => {
+      const commandCwd = join(cwd, `packages/${pkg.dir}`);
       console.log(chalk.gray(`$ npm publish --tag ${tag} # ${commandCwd}`));
       const npmArgs = ["publish", "--tag", tag];
       if (ignoreScripts) {

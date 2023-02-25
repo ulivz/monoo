@@ -3,6 +3,7 @@
  */
 import type { RequestInit } from "node-fetch";
 import type urlJoin from "url-join";
+import { IPackageJSON } from '../types/monorepo';
 
 /**
  * Shared namespace
@@ -17,11 +18,6 @@ export namespace SharedNS {
  * Release namespace
  */
 export namespace ReleaseNS {
-  export interface ILernaConfig {
-    version: string;
-    [key: string]: unknown;
-  }
-
   export interface IModifyReleaseArgumentsContext {
     arguments: string[];
     version: string;
@@ -86,36 +82,13 @@ export namespace ReleaseNS {
 }
 
 /**
- * Npm namespace
- */
-export namespace NpmNS {
-  export interface IPackageJSON {
-    name: string;
-    version: string;
-  }
-
-  export interface IPackage {
-    dirname: string;
-    name: string;
-    pkg: Record<string, unknown>;
-  }
-
-  export interface IRemotePackageInfo {
-    name: string;
-    dirname: string;
-    version: string;
-    path: string;
-  }
-}
-
-/**
  * Run namespace
  */
 export namespace RunNS {
   export interface IOptions extends SharedNS.IOptions {
     commands: string[];
     runInBand: boolean;
-    filter?(v: NpmNS.IPackage): boolean;
+    filter?(v: IPackageJSON): boolean;
     [key: string]: unknown;
   }
 }
