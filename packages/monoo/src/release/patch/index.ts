@@ -46,7 +46,7 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
   logger.info("Patch Started");
 
   if (!tag) {
-    throw new Error('[MONO] "tag" is required for "patch"');
+    throw new Error('[MONOO] "tag" is required for "patch"');
   }
 
   const lernaConfig = resolveLernaConfig(cwd).data;
@@ -68,7 +68,7 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
   if (pkgs.every((pkg) => pkg.version === version)) {
     return console.log(
       `${chalk.cyan("❯ ")}${chalk.gray(
-        "[MONO]"
+        "[MONOO]"
       )} Do not need "patch" since all packages've been published correctly! `
     );
   }

@@ -137,7 +137,7 @@ export async function release(options: ReleaseNS.IOptions) {
   /**
    * Set this env for subsequent build process.
    */
-  process.env.MONO_RELEASE_VERSION = version;
+  process.env.MONOO_RELEASE_VERSION = version;
 
   /**
    * Execute custom build script before release.

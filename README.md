@@ -40,7 +40,7 @@ When we released **_monorepo_**, a headache problem was that release flow failed
     - [monoo patch](#monoo-patch)
     - [monoo changelog](#monoo-changelog)
     - [monoo dev](#monoo-dev)
-  - [Projects Using MONO](#projects-using-mono)
+  - [Projects Using MONOO](#projects-using-mono)
   - [FAQ](#faq)
     - [I don't use lerna, can I use it?](#i-dont-use-lerna-can-i-use-it)
   - [Author](#author)
@@ -200,9 +200,9 @@ monoo changelog --beautify --commit --gitPush --attachAuthor --authorNameType na
 monoo dev       # launch a on-demand development build for monorepo.
 ```
 
-## Projects Using MONO
+## Projects Using MONOO
 
-Projects that use **MONO**:
+Projects that use **MONOO**:
 
 - [VuePress](https://github.com/vuejs/vuepress): 📝 Minimalistic Vue-powered static site generator.
 - Many ByteDance projects.

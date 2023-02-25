@@ -19,7 +19,7 @@ export function dev(opts: IDOptions = {}) {
   builder.enableStdinFeature();
   console.log();
   console.log(
-    `  ${styled(`[MONO]`)} Development mode ${chalk.gray(
+    `  ${styled(`[MONOO]`)} Development mode ${chalk.gray(
       `(modify code to create builder or enter ${styled(
         "n"
       )} to create builder manually.)`
