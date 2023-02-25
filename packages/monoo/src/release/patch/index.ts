@@ -65,14 +65,6 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
   const pkgs = await loadMonorepoPackages(cwd, lernaConfig);
   pkgs.forEach((pkg) => removeGitHead(join(pkg.dir, "package.json")));
 
-  if (pkgs.every((pkg) => pkg.version === version)) {
-    return console.log(
-      `${chalk.cyan("❯ ")}${chalk.gray(
-        "[MONOO]"
-      )} Do not need "patch" since all packages've been published correctly! `
-    );
-  }
-
   const remotePkgs: IMonorepoPackageWithRemoteInfo[] = await Promise.all(
     pkgs.map<Promise<IMonorepoPackageWithRemoteInfo>>(async (pkg) => {
       return {
@@ -81,6 +73,14 @@ export async function patch(options: PatchNS.IOptions): Promise<void | never> {
       };
     })
   );
+
+  if (remotePkgs.every((pkg) => pkg.remoteVersion === version)) {
+    return console.log(
+      `${chalk.cyan("❯ ")}${chalk.gray(
+        "[MONOO]"
+      )} Do not need "patch" since all packages've been published correctly! `
+    );
+  }
 
   const visibleReleaseStatusLog = getVisibleReleaseStatusLog(
     remotePkgs,

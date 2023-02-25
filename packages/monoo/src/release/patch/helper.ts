@@ -16,13 +16,13 @@ export function getVisibleReleaseStatusLog(
   currentTag: string
 ) {
   const table = pkgs.map((pkg) => {
-    if (pkg.version === currentVersion) {
+    if (pkg.remoteVersion === currentVersion) {
       return [pkg.name, pkg.version, "Yes", "-"].map((v) => chalk.dim(v));
     }
 
     return [
       chalk.bold(chalk.red(pkg.name)),
-      chalk.bold(chalk.red(pkg.version)),
+      chalk.bold(chalk.red(pkg.remoteVersion)),
       chalk.bold(chalk.red("NO")),
       chalk.bold(chalk.red(currentVersion)),
     ];

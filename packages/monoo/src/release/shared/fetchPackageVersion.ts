@@ -12,7 +12,7 @@ export async function fetchPackageVersion(name: string, tag: string) {
       await execa("npm", ["view", `${name}@${tag}`, "version"])
     ).stdout.toString();
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return "- (1st release)";
   }
 }
