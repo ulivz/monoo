@@ -1,7 +1,7 @@
 {
   "name": "@monoo/shared",
   "description": "Shared for monoo",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "main": "lib/index",
   "types": "lib/index",
   "files": [
@@ -14,7 +14,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@monoo/types": "0.4.2",
+    "@monoo/types": "0.4.3",
     "@types/fs-extra": "8.1.0",
     "chalk": "2.4.1",
     "chokidar": "3.4.0",
